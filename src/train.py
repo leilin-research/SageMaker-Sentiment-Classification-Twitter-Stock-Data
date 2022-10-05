@@ -234,13 +234,13 @@ def create_data_loader(path, batch_size):
                               usecols=['input_ids', 'label_id'])
         df = df.append(df_temp)
         
-    print(df)
+    # print(df)
     ds = ReviewDataset(
         input_ids_list=df.input_ids.to_numpy(),
         label_id_list=df.label_id.to_numpy(),
     )
     
-    print(ds.__len__())
+    # print(ds.__len__())
     
     return DataLoader(
         ds,
@@ -298,9 +298,9 @@ def train_model(model,
                     model.eval()
 
                     for sent, label in val_data_loader:
-                        print("val_data_loader")
-                        print(sent)
-                        print(label)
+                        # print("val_data_loader")
+                        # print(sent)
+                        # print(label)
                         sent = sent.squeeze(0)
                         if torch.cuda.is_available():
                             sent = sent.cuda()
@@ -380,7 +380,7 @@ if __name__ == '__main__':
             # Configure model
             config = configure_model()
             model = RobertaForSequenceClassification.from_pretrained(
-                'roberta-base',
+                'cardiffnlp/twitter-roberta-base-sentiment-latest',#'roberta-base',
                 config=config
             )
 
